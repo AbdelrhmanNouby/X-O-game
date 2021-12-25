@@ -6,18 +6,19 @@
 
 #include <stdio.h>
 #include <conio.h>
+#include "typedef.h"
 
-char square[10] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };      // x-o template ( Empty position numbers )
+uint8_t square[10] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };      // x-o template ( Empty position numbers )
 void board();           // x-o template ( the boarders )
-int checkwin();	   	    // function to check if any player win ( 1 if player win 0 if draw )
-char checker = 'c' ;    // indicator to the end of the game
+uint8_t checkwin();	   	    // function to check if any player win ( 1 if player win 0 if draw )
+uint8_t checker = 'c' ;    // indicator to the end of the game
 void reset();			// function to reset template and start new game 
 
-int main(void)
+main()
 {
-	static char playerNumber = 1 ;   // variable to hold the player number 
-	char mark ;						 // variable to hold x or o mark 
-	char position ;                  // variable to select position in template 
+	static uint8_t playerNumber = 1 ;   // variable to hold the player number 
+	uint8_t mark ;						 // variable to hold x or o mark 
+	uint8_t position ;                  // variable to select position in template 
 	
 	while(1)
 	{	
@@ -84,10 +85,11 @@ Function to return game status
 
 1 --> one of tow players is win
 0 --> draw
+'c' --> game in progress 
 
  **********************************************/
 
-int checkwin()
+uint8_t checkwin()
 {
 	if (square[1] == square[2] && square[2] == square[3])
 	return 1;
@@ -117,6 +119,9 @@ int checkwin()
 	square[4] != '4' && square[5] != '5' && square[6] != '6' && square[7]
 	!= '7' && square[8] != '8' && square[9] != '9')
 	return 0;
+	
+	else 
+	return 'c';
 }
 
 /*******************************
@@ -126,7 +131,7 @@ int checkwin()
 
 void reset()   
 {
-	int index = 0 ;
+	uint8_t index = 0 ;
 	for( index = 0 ; index < 11 ; index++ )
 	{
 		square[index] = index+48 ; 
