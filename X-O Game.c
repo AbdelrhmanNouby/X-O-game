@@ -25,12 +25,12 @@ int main(void)
 		board(); 								 // initialize the template 
 	    while ( checker != 1 && checker != 0 )   // the game is not over 
 	    {
-	    	playerNumber = (( playerNumber % 2 ) ? 1 : 2 );	
-	        printf("\nPlayer %d, enter a position number:  ",playerNumber);
+	    	playerNumber = (( playerNumber % 2 ) ? 1 : 2 );						// go to the next player
+	        printf("\nPlayer %d, enter a position number:  ",playerNumber);		// select position 
 	        position = getch();
-	        mark = (( playerNumber == 1 ) ? 'X' : 'O');
+	        mark = (( playerNumber == 1 ) ? 'X' : 'O');							// assign mark depend on player
 	        
-		    if( square[position-48]== position )
+		    if( square[position-48]== position )    // checking valid position ( -48 >> convert char getted to int )
 	        {
  				square[position-48] = mark ;       		
         	}
@@ -40,22 +40,23 @@ int main(void)
         		playerNumber-- ;
 	        }
 					
-	        board();
-	        checker = checkwin();
-		    playerNumber++ ; 			 
+	        board();      // print updated template
+	        checker = checkwin();	// check game status 
+		    playerNumber++ ;       // go to the second player 			 
 	    }
-	    if ( checker == 1 && playerNumber == 1 )
+	    if ( checker == 1 && playerNumber == 1 ) 		// print game status if it finished 		
 	    	printf("\n***** player 1 is winner *****");
 	    else if ( checker == 1 && playerNumber != 1 )
 	    	printf("\n***** player 2 is winner *****");
 	    else 
 	    	printf("\n***** game is draw *****");
-	   	reset();
+	   	reset();			// start new game 
 	}	  
 }
 
 
 // function to draw board of game
+
 void board()
 {
 	printf("\n\n\t X - O Game \n\n");
@@ -117,7 +118,13 @@ int checkwin()
 	!= '7' && square[8] != '8' && square[9] != '9')
 	return 0;
 }
-void reset()
+
+/*******************************
+ function to return back template to initial statu 
+ and start new game 
+********************************/
+
+void reset()   
 {
 	int index = 0 ;
 	for( index = 0 ; index < 11 ; index++ )
